@@ -1,6 +1,5 @@
 // components/searchBox/searchBox.js
 const createUrlWithOpt = require('../../utils/doubanAPI.js').createUrlWithOpt;
-const getList = require('../../utils/doubanAPI.js').getList;
 Component({
   /**
    * 组件的属性列表
@@ -8,6 +7,10 @@ Component({
   properties: {
     searchUrl: {
       type: String
+    },
+    // 请求数据的函数
+    getList: {
+      type: Function
     }
   },
   /**
@@ -15,6 +18,7 @@ Component({
    */
   data: {
     searchContent: '',
+    showClearBtn: false,
     totalResultQuantity: 0,
     currResultQuantity: 0
   },
@@ -59,6 +63,7 @@ Component({
         let url = this.properties.searchUrl + content;
         url = createUrlWithOpt(url, 0, 18);
         // 搜索电影
+        const getList = this.properties.getList;
         getList(url).then(resData => {
           this.setData({
             totalResultQuantity: resData.total,
@@ -69,7 +74,7 @@ Component({
             actionType: 'appench',
             data: {
               hasMoreResult: this.data.totalResultQuantity > this.data.currResultQuantity,
-              searchResult: resData.moviesList
+              searchResult: resData.resultList
             }
           };
           this.triggerEvent('search-result', detail);
@@ -77,7 +82,7 @@ Component({
         }).catch(err => {
           wx.hideLoading();
           wx.showToast({
-            title: '搜索电影出错',
+            title: '搜索出错',
             icon: 'none'
           });
         });
@@ -94,9 +99,8 @@ Component({
       this.setData({
         searchContent: '',
         showClearBtn: false,
-        searchResult: [],
       });
-      // this._scrollToTop(); // 显示热映等电影内容时，立即滚动到顶部
+      this._scrollToTop(); // 显示热映等电影内容时，立即滚动到顶部
       // 触发自定义事件
       const detail = {
         actionType: 'clear'
@@ -117,6 +121,7 @@ Component({
         });
         url = createUrlWithOpt(url, currResultQuantity, 18);
         // 请求更多的搜索结果
+        const getList = this.properties.getList;
         getList(url).then(resData => {
           this.setData({
             currResultQuantity: currResultQuantity + 18
@@ -126,7 +131,7 @@ Component({
             actionType: 'appench',
             data: {
               hasMoreResult: totalResultQuantity > currResultQuantity,
-              searchResult: resData.moviesList
+              searchResult: resData.resultList
             }
           };
           this.triggerEvent('search-result', detail);
@@ -139,6 +144,13 @@ Component({
           })
         });
       }
+    },
+    // 使页面滚动到顶部
+    _scrollToTop: function () {
+      wx.pageScrollTo({
+        scrollTop: 0,
+        duration: 0
+      });
     }
   }
 })

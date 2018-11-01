@@ -1,5 +1,5 @@
 // pages/movies/movieDetails/movieDetails.js
-const getDetails = require('../../../utils/doubanAPI.js').getDetails;
+const getMovieDetails = require('../../../utils/doubanAPI.js').getMovieDetails;
 Page({
 
   /**
@@ -23,7 +23,7 @@ Page({
     // console.log(movieId);
     const apiKey = '?apikey=0df993c66c0c636e29ecbb5344252a4a';
     const url = 'https://api.douban.com/v2/movie/subject/' + movieId + apiKey;
-    getDetails(url).then(movieData => {
+    getMovieDetails(url).then(movieData => {
       this.setData({
         str_directors: this._concatNames(movieData.directors),
         str_casts: this._concatNames(movieData.casts),

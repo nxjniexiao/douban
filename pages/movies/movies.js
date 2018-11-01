@@ -1,7 +1,6 @@
 // pages/movies/movies.js
-const getList = require('../../utils/doubanAPI.js').getList;
+const getMoviesList = require('../../utils/doubanAPI.js').getMoviesList;
 const createUrlWithOpt = require('../../utils/doubanAPI.js').createUrlWithOpt;
-const doubanAPI = require('../../utils/doubanAPI.js');
 Page({
 
   /**
@@ -11,6 +10,7 @@ Page({
     moviesBeingRelease: [],
     moviesWillBeReleased: [],
     highScoreMovies: [],
+    getMoviesList: getMoviesList,
     searchUrl: 'https://api.douban.com/v2/movie/search?q=',
     hasMoreResult: null,
     searchResult: [],
@@ -25,9 +25,9 @@ Page({
     let urlHighScoreMovies = 'https://api.douban.com/v2/movie/top250';
     // 向服务器发起请求：正在热映的电影
     urlBeingRelease = createUrlWithOpt(urlBeingRelease, 0, 3);
-    getList(urlBeingRelease).then(resData => {
+    getMoviesList(urlBeingRelease).then(resData => {
       this.setData({
-        moviesBeingRelease: resData.moviesList
+        moviesBeingRelease: resData.resultList
       });
     }).catch(err => {
       wx.showToast({
@@ -37,9 +37,9 @@ Page({
     })
     // 向服务器发起请求：即将上映的电影
     urlWillBeReleased = createUrlWithOpt(urlWillBeReleased, 0, 3);
-    getList(urlWillBeReleased).then(resData => {
+    getMoviesList(urlWillBeReleased).then(resData => {
       this.setData({
-        moviesWillBeReleased: resData.moviesList
+        moviesWillBeReleased: resData.resultList
       });
     }).catch(err => {
       wx.showToast({
@@ -49,9 +49,9 @@ Page({
     });
     // 向服务器发起请求：高分电影
     urlHighScoreMovies = createUrlWithOpt(urlHighScoreMovies, 0, 3);
-    getList(urlHighScoreMovies).then(resData => {
+    getMoviesList(urlHighScoreMovies).then(resData => {
       this.setData({
-        highScoreMovies: resData.moviesList
+        highScoreMovies: resData.resultList
       });
     }).catch(err => {
       wx.showToast({
@@ -93,12 +93,5 @@ Page({
         searchResult: []
       });
     }
-  },
-  // 使页面滚动到顶部
-  _scrollToTop: function() {
-    wx.pageScrollTo({
-      scrollTop: 0,
-      duration: 0
-    });
   }
 })

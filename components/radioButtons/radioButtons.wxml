@@ -1,0 +1,4 @@
+<!--components/radioButtons/buttons.wxml-->
+<view class="buttons-contianer" bindtap='changeClass'>
+  <text wx:for="{{buttons}}" wx:for-item="button" wx:key="{{button.value}}" class="{{index == activeButtonIndex ? 'active' : ''}}" data-index="{{index}}">{{button.value}}</text>
+</view>

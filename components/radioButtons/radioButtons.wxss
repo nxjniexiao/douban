@@ -1,0 +1,18 @@
+/* components/radioButtons/buttons.wxss */
+.buttons-contianer{
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #ccc;
+}
+.buttons-contianer text{
+  flex:1;
+  font-size: 14px;
+  line-height: 38px;
+  text-align: center;
+  background-color: #fff;
+
+}
+.buttons-contianer text.active{
+  color: #000;
+  border-bottom: 2px solid #999;
+}

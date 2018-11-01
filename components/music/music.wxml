@@ -1,0 +1,12 @@
+<!--components/music/music.wxml-->
+<view class="music-container">
+  <text class="special-text music-rank">{{rank}}</text>
+  <image class="music-poster" src="{{music.musicPoster}}" />
+  <view class="music-info">
+    <text class="music-title">{{music.title}}</text>
+    <text wx:if="{{music.altTitle}}" class="music-alt-title">{{music.altTitle}}</text>
+    <text class="music-author">{{music.author}}</text>
+    <stars score="{{music.score}}" />
+  </view>
+  <text class="special-text music-more">></text>
+</view>

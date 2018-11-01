@@ -3,7 +3,10 @@ Page {
   background-color: #F2F2F2;
   font-size: 24rpx;
 }
-search-box {
+.music-page{
+  padding-top: 10rpx;
+}
+.music-header {
   position: fixed;
   left: 0;
   top: 0;

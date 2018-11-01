@@ -1,6 +1,6 @@
 <!--pages/movies/movies.wxml-->
 <view class="movies-container">
-  <search-box id="search-movies" searchUrl="{{searchUrl}}" bind:search-result="changeSearchResult" />
+  <search-box id="search-movies" getList="{{getMoviesList}}" searchUrl="{{searchUrl}}" bind:search-result="changeSearchResult" />
   <view wx:if="{{searchResult.length}}" class="search-movies">
     <movies-grid movies-list="{{searchResult}}" />
   </view>

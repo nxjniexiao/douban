@@ -1,0 +1,4 @@
+/* components/musicList/musicList.wxss */
+.music-list-container{
+  width: 100%;
+}

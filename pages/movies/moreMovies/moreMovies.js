@@ -1,5 +1,5 @@
 // pages/movies/moreMovies/moreMovies.js
-const getList = require('../../../utils/doubanAPI.js').getList;
+const getMoviesList = require('../../../utils/doubanAPI.js').getMoviesList;
 const createUrlWithOpt = require('../../../utils/doubanAPI.js').createUrlWithOpt;
 Page({
 
@@ -40,9 +40,10 @@ Page({
     })
     // 向服务器发起请求
     const url = createUrlWithOpt(categorys[moviesListCategory].url, 0, 21);
-    getList(url).then(resData => {
+    getMoviesList(url).then(resData => {
       this.setData({
-        ...resData
+        total: resData.total,
+        moviesList: resData.resultList
       });
     }).catch(err => {
       wx.showToast({
@@ -65,8 +66,8 @@ Page({
       let url = this.data.requestUrl;
       url = createUrlWithOpt(url, currTotal, 21);
       // 向服务器发起请求(加载更多)
-      getList(url).then(resData => {
-        const moviesList = resData.moviesList;
+      getMoviesList(url).then(resData => {
+        const moviesList = resData.resultList;
         let newMoviesList = this.data.moviesList;
         newMoviesList = newMoviesList.concat(moviesList);
         this.setData({
@@ -96,8 +97,8 @@ Page({
     let url = this.data.requestUrl;
     url = createUrlWithOpt(url, 0, 21);
     // 向服务器发起请求(刷新)
-    getList(url).then(resData => {
-      const moviesList = resData.moviesList;
+    getMoviesList(url).then(resData => {
+      const moviesList = resData.resultList;
       this.setData({
         moviesList
       });

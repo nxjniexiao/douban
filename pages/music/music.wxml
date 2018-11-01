@@ -1,5 +1,9 @@
 <!--pages/music/music.wxml-->
-<search-box id="search-music" searchUrl="{{searchUrl}}" bind:search-result="changeSearchResult" />
-<view wx:if="{{searchResult.length}}" class="search-movies">
-  <movies-grid movies-list="{{searchResult}}" />
+<view class="music-page" style="margin-top: {{searchResult.length ? '40px' : '80px'}};">
+  <view class="music-header">
+    <search-box id="search-music" getList="{{getMusicList}}" searchUrl="{{searchUrl}}" bind:search-result="changeSearchResult" />
+    <radio-buttons wx:if="{{!searchResult.length}}" buttons="{{buttons}}" bind:change-index="changeIndex"/>
+  </view>
+  <music-list wx:if="{{searchResult.length}}" musicList="{{ searchResult }}" />
+  <music-list wx:else musicList="{{ musicListData[currClassIndex].musicList }}" />
 </view>
