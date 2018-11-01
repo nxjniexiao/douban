@@ -1,0 +1,10 @@
+<!--components/moviesList/moviesList.wxml-->
+<view class="movies-list-container">
+  <view class="movies-list-header">
+    <text>{{listTitle}}</text>
+    <text data-category="{{category}}" catchtap='navToMoreMovies' class='right'>更多 ></text>
+  </view>
+  <view class="movies-list">
+    <movie wx:for="{{moviesList}}" wx:for-item="movie" wx:key="{{movie.title}}" movie-id="{{movie.id}}" img-src="{{movie.moviePoster}}" title="{{movie.title}}" score="{{movie.rating}}"></movie>
+  </view>
+</view>

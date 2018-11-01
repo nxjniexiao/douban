@@ -1,0 +1,23 @@
+/* components/stars/stars.wxss */
+.stars-container {
+  display: flex;
+  flex-direction: row;
+}
+.stars-container .stars {
+  display: flex;/* 控制 .stars 的高度，或者 font-size: 0; */
+  flex-direction: row;
+}
+.stars-container .stars image {
+  width: 20rpx;
+  height: 20rpx;
+}
+.stars-container .score {
+  font-size: 20rpx;
+  line-height: 20rpx;
+  margin-left: 20rpx;
+}
+.stars-container .tips {
+  font-size: 20rpx;
+  line-height: 20rpx;
+  margin-left: 10rpx;
+}

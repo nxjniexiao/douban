@@ -1,0 +1,20 @@
+/* components/moviesList/moviesList.wxss */
+.movies-list-container {
+  margin-bottom: 30rpx;
+  background-color: #fff;
+}
+.movies-list-container .movies-list-header{
+  height: 90rpx;
+  font-size: 24rpx;
+  line-height: 90rpx;
+  padding: 0 38rpx;
+}
+.movies-list-container .movies-list-header .right{
+  float: right;
+  color: #2F58AB;
+}
+.movies-list-container .movies-list{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;/* space-evenly 每个元素之间的间隔相等 安卓不兼容 */
+}

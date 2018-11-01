@@ -1,0 +1,12 @@
+/* pages/music/music.wxss */
+Page {
+  background-color: #F2F2F2;
+  font-size: 24rpx;
+}
+search-box {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}

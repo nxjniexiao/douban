@@ -1,0 +1,54 @@
+<!--pages/movies/movieDetails/movieDetails.wxml-->
+<!-- 信息条目模板 -->
+<template name="infoItem">
+  <view class="item-key-value">
+    <text class="item-key">{{key}}</text>
+    <text class="item-value">{{value}}</text>
+  </view>
+</template>
+<!-- 人物头像模板 -->
+<template name="personPic">
+  <view class="person-pic-container">
+    <view class="pic" style="background-image:url({{src}})" data-url="{{src}}" catchtap="showImage"></view>
+    <text class="name">{{name}}</text>
+  </view>
+</template>
+<!-- 人物列表模板 -->
+<template name="personList">
+  <view class="person-container">
+    <text class="title">{{listName}}</text>
+    <scroll-view class="person" scroll-x="true">
+      <template is="personPic" wx:for="{{personList}}" wx:key="{{item.id}}" data="{{src:item.avatars.large,name:item.name}}" />
+    </scroll-view>
+  </view>
+</template>
+<!-- 模板结束 -->
+<view class="movie-details-container">
+  <view class="blur" style="background-image:url({{images.large}})"></view>
+  <!-- 头部 -->
+  <view class="movie-header-container">
+    <view class="movie-header">
+      <image class="movie-poster" src="{{images.large}}" data-url="{{images.large}}" catchtap="showImage" />
+      <view class="movie-info">
+        <text class="title">{{title}}</text>
+        <text class="sub-title">{{original_title}}</text>
+        <template is="infoItem" data="{{key:'导演:',value:str_directors}}" />
+        <template is="infoItem" data="{{key:'演员:',value:str_casts}}" />
+        <template is="infoItem" data="{{key:'类型:',value:str_type}}" />
+        <view class="item-key-value">
+          <text class="item-key">评分:</text>
+          <stars score="{{rating.average}}" />
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 剧情简介 -->
+  <view class="movie-synopsis-container">
+    <text class="synopsis-title">剧情简介</text>
+    <text class="synopsis-content {{isFolded ? 'fold' : ''}}" catchtap="handleContent">{{summary}}</text>
+  </view>
+  <!-- 导演 -->
+  <template is="personList" data="{{listName:'导演',personList: directors}}" />
+  <!-- 演员 -->
+  <template is="personList" data="{{listName:'演员',personList: casts}}" />
+</view>

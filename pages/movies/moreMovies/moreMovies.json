@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "movies-grid": "/components/moviesGrid/moviesGrid"
+  },
+  "onReachBottomDistance": "100px",
+  "enablePullDownRefresh": true
+}

@@ -1,0 +1,5 @@
+<!--pages/music/music.wxml-->
+<search-box id="search-music" searchUrl="{{searchUrl}}" bind:search-result="changeSearchResult" />
+<view wx:if="{{searchResult.length}}" class="search-movies">
+  <movies-grid movies-list="{{searchResult}}" />
+</view>

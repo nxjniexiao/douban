@@ -1,0 +1,27 @@
+{
+  "pages": [
+    "pages/music/music",
+    "pages/movies/movies",
+    "pages/movies/moreMovies/moreMovies",
+    "pages/movies/movieDetails/movieDetails"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#405f80"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/movies/movies",
+        "text": "电影",
+        "iconPath": "/images/icons/movies.png",
+        "selectedIconPath": "/images/icons/movies-active.png"
+      },
+      {
+        "pagePath": "pages/music/music",
+        "text": "音乐",
+        "iconPath": "/images/icons/music.png",
+        "selectedIconPath": "/images/icons/music-active.png"
+      }
+    ]
+  }
+}

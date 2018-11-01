@@ -1,0 +1,6 @@
+<!--components/moviesGrid/moviesGrid.wxml-->
+<view class="movies-grid-container">
+  <block  wx:for="{{moviesList}}" wx:for-item="movie" wx:key="{{movie.title}}">
+    <movie movie-id="{{movie.id}}" title="{{movie.title}}" img-src="{{movie.moviePoster}}" score="{{movie.rating}}"></movie>
+  </block>
+</view>

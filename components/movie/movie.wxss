@@ -1,0 +1,21 @@
+ /* components/movie/movie.wxss */
+.movie-container {
+  width: 200rpx;/*配合 .movie-title 的 overflow 等属性*/
+  display: flex;
+  flex-direction: column;
+}
+.movie-container .movie-pic {
+  width: 200rpx;
+  height: 270rpx;
+}
+.movie-container .movie-title {
+  margin-top: 13rpx;
+  margin-bottom: 13rpx;
+  color: #6e6e6e;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.movie-container stars {
+  margin-bottom: 20rpx;
+}

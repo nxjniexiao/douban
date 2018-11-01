@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "search-box": "/components/searchBox/searchBox",
+    "movies-list": "/components/moviesList/moviesList",
+    "movies-grid": "/components/moviesGrid/moviesGrid"
+  },
+  "navigationBarTitleText": "电影"
+}

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "search-box": "/components/searchBox/searchBox",
+    "movies-grid": "/components/moviesGrid/moviesGrid"
+  },
+  "navigationBarTitleText": "音乐"
+}

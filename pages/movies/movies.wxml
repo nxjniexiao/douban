@@ -1,0 +1,12 @@
+<!--pages/movies/movies.wxml-->
+<view class="movies-container">
+  <search-box id="search-movies" searchUrl="{{searchUrl}}" bind:search-result="changeSearchResult" />
+  <view wx:if="{{searchResult.length}}" class="search-movies">
+    <movies-grid movies-list="{{searchResult}}" />
+  </view>
+  <view wx:else class="movies">
+    <movies-list category="moviesBeingRelease" list-title="正在热映" movies-list="{{moviesBeingRelease}}" />
+    <movies-list category="moviesWillBeReleased" list-title="即将上映" movies-list="{{moviesWillBeReleased}}" />
+    <movies-list category="highScoreMovies" list-title="高分电影" movies-list="{{highScoreMovies}}" />
+  </view>
+</view>

@@ -1,0 +1,12 @@
+/* components/moviesGrid/moviesGrid.wxss */
+.movies-grid-container {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;/* space-evenly 每个元素之间的间隔相等 安卓不兼容 */
+  background-color: #fff;
+}
+.movies-grid-container movie{
+  margin-bottom: 20px;
+}

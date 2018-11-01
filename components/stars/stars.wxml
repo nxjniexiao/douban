@@ -1,0 +1,8 @@
+<!--components/stars/stars.wxml-->
+<view class="stars-container">
+  <view class="stars">
+    <image wx:for="{{starsArray}}" wx:key="{{index}}" src="{{ starsPath[item] }}"></image>
+  </view>
+  <text wx:if="{{fixedScore}}" class="score">{{fixedScore}}</text>
+  <text wx:else class="tips">暂无评分</text>
+</view>

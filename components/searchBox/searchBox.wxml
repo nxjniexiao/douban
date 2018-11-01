@@ -1,0 +1,6 @@
+<!--components/searchBox/searchBox.wxml-->
+<view class="search-container">
+  <icon type="search" size="14"></icon>
+  <input type="text" placeholder="输入内容搜索" value="{{searchContent}}" bindinput="onInput" bindconfirm="onConfirm" />
+  <icon wx:if="{{showClearBtn}}" type="clear" size="14" catchtap="clearSearchContent"></icon>
+</view>

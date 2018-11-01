@@ -1,0 +1,18 @@
+/* components/searchBox/searchBox.wxss */
+.search-container {
+  background-color: #F2F2F2;
+  /* position: fixed;
+  left: 0;
+  top: 0; */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  z-index: 1;
+}
+.search-container icon {
+  padding: 13px 13px;
+}
+.search-container input {
+  height: 40px;
+  flex: 1;
+}
