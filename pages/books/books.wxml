@@ -1,0 +1,9 @@
+<!--pages/books/books.wxml-->
+<view class="books-page" style="margin-top: {{searchResult.length ? '40px' : '80px'}};">
+  <view class="books-header">
+    <search-box id="search-books" getList="{{getBooksList}}" searchUrl="{{searchUrl}}" bind:search-result="changeSearchResult" />
+    <radio-buttons wx:if="{{!searchResult.length}}" buttons="{{buttons}}" bind:change-index="changeIndex"/>
+  </view>
+  <music-book-list wx:if="{{searchResult.length}}" list="{{ searchResult }}" />
+  <music-book-list wx:else list="{{ listData[currClassIndex].list }}" />
+</view>

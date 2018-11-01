@@ -52,11 +52,15 @@ const doubanAPI = {
   },
   // 获取音乐列表
   getMusicList: function (url) {
-    return getList(url, processMusicList);
+    return getList(url, processMusicAndBooksList, 'musics');
   },
+  // 获取读书列表
+  getBooksList: function(url) {
+    return getList(url, processMusicAndBooksList, 'books');
+  }
 }
 // 获取列表(电影/音乐/图书)
-function getList(url, processData) {
+function getList(url, processData, name) {
   return new Promise((resolve, reject) => {
     wx.request({
       url: url,
@@ -65,7 +69,7 @@ function getList(url, processData) {
         'Content-Type': 'json'
       },
       success: res => {
-        processData(res, resolve, reject);
+        processData(res, resolve, reject, name);
       }
     });
   });
@@ -97,39 +101,46 @@ function processMoviesList(res, resolve, reject) {
     reject(res.msg);
   }
 }
-// 处理音乐列表
-function processMusicList(res, resolve, reject) {
+// 处理音乐和图书列表
+function processMusicAndBooksList(res, resolve, reject, name) {
+  // type='musics' 或 'books'
   if(res.statusCode == 200) {
     // 服务器返回的音乐列表总数
     const total = res.data.total;
-    let originalMusicList = res.data.musics;
-    let newMusicList = [];
+    let originalList = res.data[name];
+    let newList = [];
     // 筛选原始数据
-    originalMusicList.forEach((music, index) => {
-      // author是数组[{name: 'A'},{name: 'B'}]
-      let author = music.author.map((author) => {
-        return author.name;
-      });
-      author = author.join(' / ');
-      newMusicList[index] = {
-        id: music.id,
-        title: music.title,
-        altTitle: music.alt_title,
+    originalList.forEach((item, index) => {
+      let author = '';
+      if(name == 'musics'){
+        // 音乐 API 中：author是数组[{name: 'A'},{name: 'B'}]
+        author = item.author.map((author) => {
+          return author.name;
+        });
+        author = author.join(' / ');
+      }else{
+        // 图书 API 中：author是数组[{'A', 'B']
+        author = item.author.join(' / ');
+      }
+      newList[index] = {
+        id: item.id,
+        title: item.title,
+        altTitle: item.alt_title,
         author,
-        musicPoster: music.image,
-        score: music.rating.average
+        image: item.image,
+        score: item.rating.average
       }
     })
-    if (originalMusicList.length){
+    if (originalList.length){
       resolve({
         total,
-        resultList: newMusicList
+        resultList: newList
       })
     } else {
-      reject('返回的音乐列表为空');
+      reject('返回的' + name + '列表为空');
     }
   }else{
-    reject('请求音乐列表失败');
+    reject('请求' + name + '列表失败');
   }
 }
 module.exports = doubanAPI;

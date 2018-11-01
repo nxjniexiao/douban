@@ -1,0 +1,4 @@
+<!--components/musicList/musicList.wxml-->
+<view class="music-list-container">
+  <music-book wx:for="{{list}}" wx:key="{{index}}" wx:for-item="info" rank="{{index + 1}}" info="{{info}}" isMusic="{{isMusic}}" />
+</view>

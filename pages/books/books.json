@@ -4,5 +4,5 @@
     "music-book-list": "/components/music-bookList/music-bookList",
     "radio-buttons": "/components/radioButtons/radioButtons"
   },
-  "navigationBarTitleText": "音乐"
+  "navigationBarTitleText": "读书"
 }

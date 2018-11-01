@@ -1,14 +1,16 @@
-// components/music/music.js
+// components/musicList/musicList.js
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-    rank: {
-      type: Number
+    // 区分 music 和 book
+    isMusic: {
+      type: Boolean,
+      value: false
     },
-    music: {
-      type: Object
+    list: {
+      type: Array
     }
   },
 

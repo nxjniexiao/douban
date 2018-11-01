@@ -5,6 +5,6 @@
     <text data-category="{{category}}" catchtap='navToMoreMovies' class='right'>更多 ></text>
   </view>
   <view class="movies-list">
-    <movie wx:for="{{moviesList}}" wx:for-item="movie" wx:key="{{movie.title}}" movie-id="{{movie.id}}" img-src="{{movie.moviePoster}}" title="{{movie.title}}" score="{{movie.rating}}"></movie>
+    <movie wx:for="{{moviesList}}" wx:for-item="movie" wx:key="{{movie.title}}" movie-id="{{movie.id}}" img-src="{{movie.moviePoster}}" title="{{movie.title}}" score="{{movie.rating}}" />
   </view>
 </view>

@@ -1,9 +1,11 @@
 {
   "pages": [
+    "pages/books/books",
     "pages/music/music",
     "pages/movies/movies",
     "pages/movies/moreMovies/moreMovies",
-    "pages/movies/movieDetails/movieDetails"
+    "pages/movies/movieDetails/movieDetails",
+    "pages/music/musicDetails/musicDetails"
   ],
   "window": {
     "navigationBarBackgroundColor": "#405f80"
@@ -21,6 +23,12 @@
         "text": "音乐",
         "iconPath": "/images/icons/music.png",
         "selectedIconPath": "/images/icons/music-active.png"
+      },
+      {
+        "pagePath": "pages/books/books",
+        "text": "读书",
+        "iconPath": "/images/icons/books.png",
+        "selectedIconPath": "/images/icons/books-active.png"
       }
     ]
   }

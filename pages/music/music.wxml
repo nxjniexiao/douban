@@ -4,6 +4,6 @@
     <search-box id="search-music" getList="{{getMusicList}}" searchUrl="{{searchUrl}}" bind:search-result="changeSearchResult" />
     <radio-buttons wx:if="{{!searchResult.length}}" buttons="{{buttons}}" bind:change-index="changeIndex"/>
   </view>
-  <music-list wx:if="{{searchResult.length}}" musicList="{{ searchResult }}" />
-  <music-list wx:else musicList="{{ musicListData[currClassIndex].musicList }}" />
+  <music-book-list wx:if="{{searchResult.length}}" list="{{ searchResult }}" isMusic="{{true}}" />
+  <music-book-list wx:else list="{{ listData[currClassIndex].list }}" isMusic="{{true}}" />
 </view>

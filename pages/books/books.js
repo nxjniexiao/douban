@@ -1,36 +1,36 @@
-// pages/music/music.js
-const getMusicList = require('../../utils/doubanAPI.js').getMusicList;
+// pages/books/books.js
+const getBooksList = require('../../utils/doubanAPI.js').getBooksList;
 const createUrlWithOpt = require('../../utils/doubanAPI.js').createUrlWithOpt;
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    getMusicList: getMusicList,
-    searchUrl: 'https://api.douban.com/v2/music/search?q=',
-    classUrl: 'https://api.douban.com/v2/music/search?tag=',
+    getBooksList: getBooksList,
+    searchUrl: 'https://api.douban.com/v2/book/search?q=',
+    classUrl: 'https://api.douban.com/v2/book/search?tag=',
     hasMoreResult: null,
     searchResult: [],
     listData: [{
-        tag: '华语',
-        list: []
-      },
-      {
-        tag: '欧美',
-        list: []
-      },
-      {
-        tag: '粤语',
-        list: []
-      },
-      {
-        tag: '日语',
-        list: []
-      },
-      {
-        tag: '韩语',
-        list: []
-      }
+      tag: '小说',
+      list: []
+    },
+    {
+      tag: '文学',
+      list: []
+    },
+    {
+      tag: '历史',
+      list: []
+    },
+    {
+      tag: '随笔',
+      list: []
+    },
+    {
+      tag: '漫画',
+      list: []
+    }
     ],
     buttons: [],
     currClassIndex: 0
@@ -39,7 +39,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     // 定义按钮
     const buttons = this.data.listData.map(music => {
       return {
@@ -50,19 +50,19 @@ Page({
       buttons
     });
     // 获取数据
-    this.getList();
+    this.getListData();
   },
   /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
+ * 页面上拉触底事件的处理函数
+ */
+  onReachBottom: function () {
     if (!this.data.searchResult.length) {
       // 未进入搜索页
       return;
     }
     if (this.data.hasMoreResult) {
       // 调用组件方法
-      this.selectComponent('#search-music').loadMoreResult();
+      this.selectComponent('#search-books').loadMoreResult();
     } else {
       wx.showToast({
         title: '到底了',
@@ -71,7 +71,7 @@ Page({
     }
   },
   // 监听搜索框组件传入的数据
-  changeSearchResult: function(event) {
+  changeSearchResult: function (event) {
     const actionType = event.detail.actionType;
     if (actionType == 'appench') {
       let newSearchResult = this.data.searchResult.concat(event.detail.data.searchResult);
@@ -87,16 +87,16 @@ Page({
     }
   },
   // 监听单选按钮的变化
-  changeIndex: function(event) {
+  changeIndex: function (event) {
     const newClassIndex = event.detail.newClassIndex;
     this.setData({
       currClassIndex: newClassIndex
     });
     // 获取数据
-    this.getList();
+    this.getListData();
   },
   // 获取数据
-  getList() {
+  getListData() {
     const listData = this.data.listData;
     const currClassIndex = this.data.currClassIndex;
     const list = listData[currClassIndex].list;
@@ -109,7 +109,7 @@ Page({
       tag = encodeURIComponent(tag);
       let url = this.data.classUrl + tag;
       url = createUrlWithOpt(url, 0, 20);
-      getMusicList(url).then((resData) => {
+      getBooksList(url).then((resData) => {
         listData[currClassIndex].list = resData.resultList;
         this.setData({
           listData

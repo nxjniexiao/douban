@@ -25,7 +25,7 @@
 }
 .music-info{
   width: 345rpx;
-  padding-left: 20rpx;
+  padding: 0 20rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
