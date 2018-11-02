@@ -1,0 +1,106 @@
+/* pages/music-bookDetails/music-bookDetails.wxss */
+
+page {
+  background-color: #f2f2f0;
+}
+.header {
+  padding: 80rpx 30rpx 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+.header>image {
+  width: 200rpx;
+  height: 200rpx;
+  margin-right: 40rpx;
+  flex: 0 0 auto;
+}
+.header .header-info {
+  display: flex;
+  max-width: 450rpx;
+  flex-direction: column;
+  justify-content: space-around;
+  line-height: 12px;
+}
+.header .header-info .title, .sub-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.header .header-info .title {
+  font-size: 34rpx;
+  line-height: 44rpx;
+  font-weight: bold;
+}
+.container {
+  margin-top: 20px;
+  padding: 0 30rpx;
+}
+.contianer-mt-10px{
+  margin-top: 10px;
+ }
+.container .title {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.container .tags {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+.container .tags .single-tag {
+  height: 56rpx;
+  line-height: 56rpx;
+  margin: 0 10px 10px 0;
+  padding: 0 28rpx;
+  border-radius: 28rpx;
+  background-color: #f9f9f9;
+}
+.music-list {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.info-container {
+  display: flex;
+  flex-direction: column;
+}
+.info-container .info{
+  padding-top: 10px;
+}
+.info-container .info.fold{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+/* 模板样式 */
+
+/* 条目信息模板样式 */
+
+text {
+  color: #484848;
+}
+
+.item-key-value {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.item-key-value .item-key {
+  margin-right: 10px;
+  flex: 0 0 auto;
+  text-align: left;
+  color: #919191;
+}
+
+.item-key-value .item-value {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

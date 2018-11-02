@@ -1,5 +1,5 @@
 <!--components/music/info.wxml-->
-<view class="music-container" data-music-id="{{info.id}}" bindtap="navToMusicDetails">
+<view class="music-container" data-id="{{info.id}}" bindtap="navToMusicDetails">
   <text class="special-text music-rank">{{rank}}</text>
   <image class="music-poster" src="{{info.image}}" style="width: {{isMusic ? '135rpx' : '95rpx'}}"/>
   <view class="music-info">

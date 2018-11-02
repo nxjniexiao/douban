@@ -1,6 +1,8 @@
 /* 
-  获取电影列表：getMoviesList(url) 返回一个promise
-  获取指定电影信息: getMovieDetails(url) 返回一个promise
+  获取电影列表：getMoviesList(url) 返回一个promise;
+  获取音乐列表：getMusicList(url) 返回一个promise;
+  获取读书列表：getBooksList(url) 返回一个promise;
+  获取指定电影/音乐/图书信息: getDetails(url) 返回一个promise;
  */
 const doubanAPI = {
   // url 后增加请求数量参数
@@ -28,39 +30,34 @@ const doubanAPI = {
   },
   // 获取电影列表
   getMoviesList: function(url) {
-    return getList(url, processMoviesList);
-  },
-  // 获取电影信息
-  getMovieDetails: function(url) {
-    return new Promise((resolve, reject) => {
-      wx.request({
-        url: url,
-        method: 'GET',
-        header: {
-          'Content-Type': 'json'
-        },
-        success: (res) => {
-          if (res.statusCode === 200) {
-            const movieData = res.data;
-            resolve(movieData);
-          } else {
-            reject(res.data.msg);
-          }
-        }
-      });
-    });
+    return http(url).then(processMoviesList);
   },
   // 获取音乐列表
-  getMusicList: function (url) {
-    return getList(url, processMusicAndBooksList, 'musics');
+  getMusicList: function(url) {
+    return http(url).then(res => {
+      return processMusicAndBooksList(res, 'musics');
+    });
   },
   // 获取读书列表
   getBooksList: function(url) {
-    return getList(url, processMusicAndBooksList, 'books');
+    return http(url).then(res => {
+      return processMusicAndBooksList(res, 'books');
+    });
+  },
+  // 获取电影/音乐/图书信息
+  getDetails: function (url) {
+    return http(url).then(res => {
+      if (res.statusCode === 200) {
+        const data = res.data;
+        return Promise.resolve(data);
+      } else {
+        return Promise.reject(res.data.msg);
+      }
+    });
   }
 }
 // 获取列表(电影/音乐/图书)
-function getList(url, processData, name) {
+function http(url) {
   return new Promise((resolve, reject) => {
     wx.request({
       url: url,
@@ -69,13 +66,16 @@ function getList(url, processData, name) {
         'Content-Type': 'json'
       },
       success: res => {
-        processData(res, resolve, reject, name);
+        resolve(res); // 请求成功
+      },
+      fail: err => {
+        reject('请求失败'); // 请求失败
       }
     });
   });
 }
 // 处理电影列表
-function processMoviesList(res, resolve, reject) {
+function processMoviesList(res) {
   if (res.statusCode === 200) {
     // 服务器返回的电影总数
     const total = res.data.total;
@@ -90,21 +90,21 @@ function processMoviesList(res, resolve, reject) {
           rating: list.rating.average,
         };
       });
-      resolve({
+      return Promise.resolve({
         total,
         resultList: newMoviesList
       });
     } else {
-      reject('返回的电影数组为空');
+      return Promise.reject('返回的电影数组为空');
     }
   } else {
-    reject(res.msg);
+    return Promise.reject(res.msg);
   }
 }
 // 处理音乐和图书列表
-function processMusicAndBooksList(res, resolve, reject, name) {
-  // type='musics' 或 'books'
-  if(res.statusCode == 200) {
+function processMusicAndBooksList(res, name) {
+  // name='musics' 或 'books'
+  if (res.statusCode == 200) {
     // 服务器返回的音乐列表总数
     const total = res.data.total;
     let originalList = res.data[name];
@@ -112,13 +112,13 @@ function processMusicAndBooksList(res, resolve, reject, name) {
     // 筛选原始数据
     originalList.forEach((item, index) => {
       let author = '';
-      if(name == 'musics'){
+      if (name == 'musics') {
         // 音乐 API 中：author是数组[{name: 'A'},{name: 'B'}]
         author = item.author.map((author) => {
           return author.name;
         });
         author = author.join(' / ');
-      }else{
+      } else {
         // 图书 API 中：author是数组[{'A', 'B']
         author = item.author.join(' / ');
       }
@@ -131,16 +131,16 @@ function processMusicAndBooksList(res, resolve, reject, name) {
         score: item.rating.average
       }
     })
-    if (originalList.length){
-      resolve({
+    if (originalList.length) {
+      return Promise.resolve({
         total,
         resultList: newList
       })
     } else {
-      reject('返回的' + name + '列表为空');
+      return Promise.reject('返回的' + name + '列表为空');
     }
-  }else{
-    reject('请求' + name + '列表失败');
+  } else {
+    return Promise.reject('请求' + name + '列表失败');
   }
 }
 module.exports = doubanAPI;

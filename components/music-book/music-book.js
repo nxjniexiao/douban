@@ -29,10 +29,10 @@ Component({
   methods: {
     // 跳转至音乐详情页面
     navToMusicDetails: function(event) {
-      const musicId = event.currentTarget.dataset.musicId;
+      const id = event.currentTarget.dataset.id;
       // 跳转
       wx.navigateTo({
-        url: '/pages/music/musicDetails/musicDetails?musicId=' + musicId,
+        url: '/pages/music-bookDetails/music-bookDetails?id=' + id + '&type=' + (this.properties.isMusic? 'music' : 'book'),
       })
     }
   }

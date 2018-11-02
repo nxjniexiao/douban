@@ -1,0 +1,46 @@
+<!--pages/music-bookDetails/music-bookDetails.wxml-->
+<!-- 信息条目模板 -->
+<template name="infoItem">
+  <view class="item-key-value">
+    <text class="item-key">{{key}}</text>
+    <text class="item-value">{{value}}</text>
+  </view>
+</template>
+<view class="page-container">
+  <view class="header">
+    <image src="{{image}}" style="width: {{pageType == 'book' ? '140rpx' : '200rpx'}};" />
+    <view class="header-info">
+      <text class="title">{{title}}</text>
+      <text class="sub-title" wx:if="{{alt_title}}">{{alt_title}}</text>
+      <template is="infoItem" data="{{key:(pageType=='book')?'作者:':'表演者:',value:author}}" />
+      <template is="infoItem" data="{{key:(pageType=='book')?'出版社:':'出版者:',value:publisher}}" />
+      <template is="infoItem" data="{{key:(pageType=='book')?'出版时间:':'发行时间:',value:pubDate}}" />
+      <view class="item-key-value">
+        <text class="item-key">评分:</text>
+        <stars score="{{score}}" />
+      </view>
+    </view>
+  </view>
+  <view class="container">
+    <text class="title">标签</text>
+    <view class='tags'>
+      <text class="single-tag" wx:for="{{tags}}" wx:for-item="tag" wx:key="{{tag.name}}">{{tag.name}}</text>
+    </view>
+  </view>
+  <view wx:if="{{musicList.length}}" class="container contianer-mt-10px">
+    <text class="title">曲目</text>
+    <view class="music-list">
+      <text wx:for="{{musicList}}" wx:for-item="music" wx:key="{{music}}">{{music}}</text>
+    </view>
+  </view>
+  <view wx:else>
+    <view class="container info-container  contianer-mt-10px">
+      <text class="title">作品简介</text>
+      <text class="info {{bookInfoIsFolded ? 'fold' : ''}}" catchtap="handleBookInfo">{{bookInfo}}</text>
+    </view>
+    <view class="container info-container">
+      <text class="title">作者</text>
+      <text class="info {{authorInfoIsFolded ? 'fold' : ''}}" catchtap="handleAuthorInfo">{{authorInfo}}</text>
+    </view>
+  </view>
+</view>

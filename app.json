@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/movies/movies",
     "pages/books/books",
     "pages/music/music",
-    "pages/movies/movies",
     "pages/movies/moreMovies/moreMovies",
     "pages/movies/movieDetails/movieDetails",
-    "pages/music/musicDetails/musicDetails"
+    "pages/music-bookDetails/music-bookDetails"
   ],
   "window": {
     "navigationBarBackgroundColor": "#405f80"
