@@ -44,6 +44,7 @@ Component({
         this.setData({
           showClearBtn: false
         });
+        this._scrollToTop(); // 退出搜索界面时，立即滚动到顶部
         // 触发自定义事件
         const detail = {
           actionType: 'clear'
@@ -79,6 +80,7 @@ Component({
           };
           this.triggerEvent('search-result', detail);
           wx.hideLoading();
+          this._scrollToTop(); // 退出搜索界面时，立即滚动到顶部
         }).catch(err => {
           wx.hideLoading();
           wx.showToast({
@@ -100,7 +102,7 @@ Component({
         searchContent: '',
         showClearBtn: false,
       });
-      this._scrollToTop(); // 显示热映等电影内容时，立即滚动到顶部
+      this._scrollToTop(); // 退出搜索界面时，立即滚动到顶部
       // 触发自定义事件
       const detail = {
         actionType: 'clear'

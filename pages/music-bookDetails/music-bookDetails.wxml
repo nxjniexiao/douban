@@ -8,7 +8,7 @@
 </template>
 <view class="page-container">
   <view class="header">
-    <image src="{{image}}" style="width: {{pageType == 'book' ? '140rpx' : '200rpx'}};" />
+    <image src="{{image}}" style="width: {{pageType == 'book' ? '140rpx' : '200rpx'}};"  data-url="{{image}}" catchtap="showImage"/>
     <view class="header-info">
       <text class="title">{{title}}</text>
       <text class="sub-title" wx:if="{{alt_title}}">{{alt_title}}</text>
